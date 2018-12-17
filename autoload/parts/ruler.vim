@@ -1,5 +1,6 @@
 scriptencoding utf-8
 
-function! parts#ruler#status(ldigit, cdigit) abort
-  return '%#ZRuler#'.printf('%%%dl/%%L:%%%dv', a:ldigit, a:cdigit)
+function! parts#ruler#Info() abort
+  let l:format = get(g:, 'zipline.ruler', [4, -3])
+  return printf('%%%dl/%%L:%%%dv', l:format[0], l:format[1])
 endfunction

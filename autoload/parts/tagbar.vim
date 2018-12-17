@@ -1,12 +1,9 @@
 scriptencoding utf-8
 
-function! parts#tagbar#tag(format, default, ...) abort
+function! parts#tagbar#Tag() abort
   if exists(':Tagbar')
-    if a:0 == 0
-      return '%#ZTag#'.printf('%%{tagbar#currenttag(%s, %s)}', a:format, a:default)
-    else
-      return '%#ZTag#'.printf('%%{tagbar#currenttag(%s, %s, %s)}', a:format, a:default, a:1)
-    endif
+    let l:format = get(g:, 'zipline.tagbar', ['%s', '', '%f'])
+    return tagbar#currenttag(l:format[0], l:format[1], l:format[2])
   else
     return ''
   endif

@@ -2,44 +2,42 @@ scriptencoding utf-8
 
 let s:funclist = ['cwd', 'fcwd', 'rcwd', 'name', 'num']
 
-function! parts#bufinfo#status(...) abort
-    " For example, ('num', ':', 'cwd', '/', 'name') gives '1:parts/bufinfo.vim'
-    let l:bufinfo = ''
+function! parts#bufinfo#Info(...) abort
+  " For example, ['num', ':', 'cwd', '/', 'name'] gives '1:parts/bufinfo.vim'.
+  let l:bufinfo = ''
+  " let l:format = get(g:, 'zipline.bufinfo', ['num', ':', 'name'])
+  let l:format = a:0 ? a:1 : ['num', ':', 'name']
 
-    if a:0 == 0
-        let l:bufinfo = s:name()
+  for item in l:format
+    if count(s:funclist, l:item)
+      let l:bufinfo .= eval('s:'.item.'()')
     else
-        for l:arg in a:000
-            if count(s:funclist, l:arg)
-                let l:bufinfo .= eval(printf('s:%s()', l:arg))
-            else
-                let l:bufinfo .= l:arg
-            endif
-        endfor
+      let l:bufinfo .= item
     endif
+  endfor
 
-    return '%#ZBuf#'.l:bufinfo
+  return ' '.l:bufinfo
 endfunction
 
 function! s:cwd() abort
-    " For example, if getcwd() gives '/foo/bar', then this gives 'bar'
-    return '%{expand{"%:p:h:t"}}'
+  " For example, if getcwd() gives '/foo/bar', then this gives 'bar'.
+  return '%{expand{"%:p:h:t"}}'
 endfunction
 
 function! s:fcwd() abort
-    " Full path
-    return '%F'
+  return '%{getcwd()}'
+  " return '%F'
 endfunction
 
 function! s:rcwd() abort
-    " Relative path
-    return '%f'
+  " Relative path
+  return '%f'
 endfunction
 
 function! s:name() abort
-    return '%t'
+  return '%t'
 endfunction
 
 function! s:num() abort
-    return '%n'
+  return '%n'
 endfunction

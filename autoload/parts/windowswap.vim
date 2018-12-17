@@ -1,8 +1,9 @@
 scriptencoding utf-8
 
-function! parts#windowswap#status() abort
+function! parts#windowswap#Status() abort
   if exists('g:loaded_windowswap')
-    return '%#ZSwap#%{WindowSwap#IsCurrentWindowMarked() ? "WS" : ""}'
+    let l:format = get(g:, 'zipline.windowswap', '')
+    return WindowSwap#IsCurrentWindowMarked() ? l:format : ''
   else
     return ''
   endif
