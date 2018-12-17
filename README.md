@@ -1,4 +1,4 @@
 # Zipline
 
-Inspired by [lightline.vim](https://github.com/itchyny/lightline.vim). Very
-hard-coded, for personal use currently.
+A (currently) very hard-coded, personal statusline. Inspired by
+[lightline.vim](https://github.com/itchyny/lightline.vim).
