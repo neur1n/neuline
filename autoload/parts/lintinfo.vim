@@ -5,6 +5,7 @@ let s:type_map = {'E': 'error', 'W': 'warning', 'H': 'hint', 'I': 'information'}
 
 "********************************************************************** {Counts
 function! parts#lintinfo#Info(type) abort
+  let l:cnt = 0
   if exists('g:loaded_neomake')
     let l:cnt = s:NeomakeInfo(a:type)
   elseif exists('g:did_coc_loaded')
