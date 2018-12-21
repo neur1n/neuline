@@ -8,7 +8,6 @@ function! parts#tabline#Tabline() abort
         \ .'%#ZCTab#'.'%{parts#tabline#CurrentTab()} '
         \ .'%#ZNCTab#'.'%{parts#tabline#NonCurrentTab()} '
         \ .'%999X%{parts#tabline#CloseButton()} '
-        " \ .'%999X[]'
 endfunction
 
 function! parts#tabline#LeftPart() abort
