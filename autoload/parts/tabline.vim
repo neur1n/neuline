@@ -7,7 +7,8 @@ function! parts#tabline#Tabline() abort
   return '%#ZTLeft#'.'  %<%{parts#tabline#LeftPart()}'.'%='
         \ .'%#ZCTab#'.'%{parts#tabline#CurrentTab()} '
         \ .'%#ZNCTab#'.'%{parts#tabline#NonCurrentTab()} '
-        \ .'%999X[]'
+        \ .'%999X%{parts#tabline#CloseButton()} '
+        " \ .'%999X[]'
 endfunction
 
 function! parts#tabline#LeftPart() abort
@@ -58,4 +59,12 @@ function! parts#tabline#NonCurrentTab() abort
     let s:tabs.str .= ' '.nr
   endfor
   return s:tabs.str
+endfunction
+
+function! parts#tabline#CloseButton() abort
+  if tabpagenr('$') == 1
+    return ''
+  else
+    return '[]'
+  endif
 endfunction
