@@ -5,8 +5,8 @@ let s:prev_tab = 0
 
 function! parts#tabline#Tabline() abort
   return '%#ZTLeft#'.'  %<%{parts#tabline#LeftPart()}'.'%='
-        \ .'%#ZCTab#'.'%{parts#tabline#CurrentTab()} '
-        \ .'%#ZNCTab#'.'%{parts#tabline#NonCurrentTab()} '
+        \ .'%#ZTCurTab#'.'%{parts#tabline#CurrentTab()} '
+        \ .'%#ZTNotCurTab#'.'%{parts#tabline#NotCurrentTab()} '
         \ .'%999X%{parts#tabline#CloseButton()} '
 endfunction
 
@@ -22,7 +22,7 @@ function! parts#tabline#CurrentTab() abort
   endif
 endfunction
 
-function! parts#tabline#NonCurrentTab() abort
+function! parts#tabline#NotCurrentTab() abort
   let l:diff = tabpagenr('$') - len(s:tabs.list)
 
   if tabpagenr() == s:prev_tab && l:diff == 0

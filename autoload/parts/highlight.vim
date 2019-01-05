@@ -1,6 +1,7 @@
 scriptencoding utf-8
 
-let s:palette = assets#palette#Palette()
+let s:prev_mode = ''
+let s:startup = 1
 let s:link_map = {
       \ 'n':  'N',
       \ 'no': 'N',
@@ -13,9 +14,67 @@ let s:link_map = {
       \ 'c':  'C',
       \ 't':  'C',
       \ }
-let s:prev_mode = ''
 
+"**************************************************************** {{{Definition
+let s:palette = neur1n#palette#Palette()
+let s:color_map = {
+      \ 'N': [s:palette.green, s:palette.cyan],
+      \ 'I': [s:palette.cyan, s:palette.blue],
+      \ 'V': [s:palette.yellow, s:palette.orange],
+      \ 'R': [s:palette.purple, s:palette.blue],
+      \ 'C': [s:palette.red, s:palette.cyan],
+      \ }
+
+function! s:HiStatic() abort
+  " Tabline
+  call neur1n#palette#Highlight('ZTLeft', s:palette.blue, 'bg', 'bold')
+  call neur1n#palette#Highlight('ZTCurTab', s:palette.orange, 'bg', 'bold')
+  execute 'highlight link ZTNotCurTab ZTLeft'
+
+  " Inactive mode and file info.
+  call neur1n#palette#Highlight('ZBufInfoU', s:palette.fg_h, s:palette.bg_h, 'bold')
+  call neur1n#palette#Highlight('ZModifU', s:palette.purple, s:palette.bg_h, 'bold')
+  call neur1n#palette#Highlight('ZRulerU', s:palette.fg_h, s:palette.bg_h, 'NONE')
+
+  call neur1n#palette#Highlight('ZFileInfo', s:palette.gray, s:palette.bg_h, 'NONE')
+
+  " Plugin dependent.
+  if exists('g:loaded_gitbranch')
+    call neur1n#palette#Highlight('ZVCS', s:palette.fg_s, s:palette.bg_h, 'bold')
+  endif
+  if exists('g:loaded_windowswap')
+    call neur1n#palette#Highlight('ZSwap', s:palette.orange, s:palette.bg_h, 'bold')
+  endif
+  if exists(':Tagbar')
+    call neur1n#palette#Highlight('ZTag', s:palette.fg_h, s:palette.bg_h, 'italic')
+  endif
+
+  if exists('g:loaded_neomake') || exists('g:loaded_ale') || exists('g:did_coc_loaded')
+    call neur1n#palette#Highlight('ZWarning', s:palette.orange, s:palette.bg_h, 'bold')
+    call neur1n#palette#Highlight('ZError', s:palette.red, s:palette.bg_h, 'bold')
+  endif
+endfunction
+
+function! s:HiDynamic(mode) abort
+  call neur1n#palette#Highlight('ZMode'.a:mode, s:palette.bg_h, s:color_map[a:mode][0], 'bold')
+  call neur1n#palette#Highlight('ZBufInfo'.a:mode, s:color_map[a:mode][1], s:palette.bg_h, 'bold')
+  call neur1n#palette#Highlight('ZModif'.a:mode, s:palette.red, s:palette.bg_h, 'bold')
+  call neur1n#palette#Highlight('ZRuler'.a:mode, s:color_map[a:mode][0], s:palette.bg_h, 'NONE')
+endfunction
+" }}}
+
+"********************************************************************** {{{Main
 function! parts#highlight#Link(...) abort
+  if s:startup
+    call s:HiStatic()
+    call s:HiDynamic('N')
+    call s:HiDynamic('I')
+    call s:HiDynamic('V')
+    call s:HiDynamic('R')
+    call s:HiDynamic('C')
+    let s:startup = 0
+  endif
+
   for w in range(1, winnr('$'))
     " if exists('w:inactive') && w:inactive == 1
     if w == winnr()
@@ -33,108 +92,4 @@ function! parts#highlight#Link(...) abort
   endfor
   return ''
 endfunction
-
-function! parts#highlight#Cache() abort
-  call s:HiStatic()
-  call s:HiDynamic('N')
-  call s:HiDynamic('I')
-  call s:HiDynamic('V')
-  call s:HiDynamic('R')
-  call s:HiDynamic('C')
-endfunction
-
-function! s:HiStatic() abort
-  " Tabline
-  " call s:Highlight('ZTLeft',
-  "       \ s:palette.T_fg[0], s:palette.T_bg[0],
-  "       \ s:palette.T_fg[1], s:palette.T_bg[1], 'bold')
-  " call s:Highlight('ZCTab',
-  "       \ s:palette.T_fg[0], s:palette.T_bg[0],
-  "       \ s:palette.T_fg[1], s:palette.T_bg[1], 'bold')
-  call s:Highlight('ZTLeft',
-        \ s:palette.T_left[0], 'bg',
-        \ s:palette.T_left[1], 'bg', 'bold')
-  call s:Highlight('ZCTab',
-        \ s:palette.T_right[0], 'bg',
-        \ s:palette.T_right[1], 'bg', 'bold')
-  execute 'highlight link ZNCTab ZTLeft'
-
-  " Inactive mode and file info.
-  " call s:Highlight('ZModeU',
-  "       \ s:palette.U_mode[0], s:palette.H_bg[0],
-  "       \ s:palette.U_mode[1], s:palette.H_bg[1], 'bold')
-  call s:Highlight('ZBufInfoU',
-        \ s:palette.U_name[0], s:palette.H_bg[0],
-        \ s:palette.U_name[1], s:palette.H_bg[1], 'bold')
-  call s:Highlight('ZModifU',
-        \ s:palette.U_modi[0], s:palette.H_bg[0],
-        \ s:palette.U_modi[1], s:palette.H_bg[1], 'bold')
-  call s:Highlight('ZRulerU',
-        \ s:palette.U_ruler[0], s:palette.H_bg[0],
-        \ s:palette.U_ruler[1], s:palette.H_bg[1], 'NONE')
-
-  call s:Highlight('ZFileInfo',
-        \ s:palette.S_info[0], s:palette.H_bg[0],
-        \ s:palette.S_info[1], s:palette.H_bg[1], 'NONE')
-
-  " Plugin dependent.
-  if exists('g:loaded_gitbranch')
-    call s:Highlight('ZVCS',
-          \ s:palette.S_vcs[0], s:palette.H_bg[0],
-          \ s:palette.S_vcs[1], s:palette.H_bg[1], 'bold')
-  endif
-  if exists('g:loaded_windowswap')
-    call s:Highlight('ZSwap',
-          \ s:palette.S_swap[0], s:palette.H_bg[0],
-          \ s:palette.S_swap[1], s:palette.H_bg[1], 'bold')
-  endif
-  if exists(':Tagbar')
-    call s:Highlight('ZTag',
-          \ s:palette.S_tag[0], s:palette.H_bg[0],
-          \ s:palette.S_tag[1], s:palette.H_bg[1], 'italic')
-  endif
-
-  if exists('g:loaded_neomake') || exists('g:loaded_ale') || exists('g:did_coc_loaded')
-    call s:Highlight('ZWarning',
-          \ s:palette.S_warn[0], s:palette.H_bg[0],
-          \ s:palette.S_warn[1], s:palette.H_bg[1], 'bold')
-    call s:Highlight('ZError',
-          \ s:palette.S_err[0], s:palette.H_bg[0],
-          \ s:palette.S_err[1], s:palette.H_bg[1], 'bold')
-    " call s:Highlight('ZWarning',
-    "       \ s:palette.H_bg[0], s:palette.S_warn[0],
-    "       \ s:palette.H_bg[1], s:palette.S_warn[1], 'bold')
-    " call s:Highlight('ZError',
-    "       \ s:palette.H_bg[0], s:palette.S_err[0],
-    "       \ s:palette.H_bg[1], s:palette.S_err[1], 'bold')
-  endif
-endfunction
-
-let s:cnt = 0
-function! s:HiDynamic(mode) abort
-  call s:Highlight('ZMode'.a:mode,
-        \ s:palette.H_bg[0], eval(printf('s:palette.%s_mode[0]', a:mode)),
-        \ s:palette.H_bg[1], eval(printf('s:palette.%s_mode[1]', a:mode)),
-        \ 'bold')
-  call s:Highlight('ZBufInfo'.a:mode,
-        \ eval(printf('s:palette.%s_name[0]', a:mode)), s:palette.H_bg[0],
-        \ eval(printf('s:palette.%s_name[1]', a:mode)), s:palette.H_bg[1],
-        \ 'bold')
-  call s:Highlight('ZModif'.a:mode,
-        \ eval(printf('s:palette.%s_modi[0]', a:mode)), s:palette.H_bg[0],
-        \ eval(printf('s:palette.%s_modi[1]', a:mode)), s:palette.H_bg[1],
-        \ 'bold')
-  call s:Highlight('ZRuler'.a:mode,
-        \ eval(printf('s:palette.%s_ruler[0]', a:mode)), s:palette.H_bg[0],
-        \ eval(printf('s:palette.%s_ruler[1]', a:mode)), s:palette.H_bg[1],
-        \ 'NONE')
-  " call s:Highlight('ZRuler'.a:mode,
-  "       \ s:palette.H_bg[0], eval(printf('s:palette.%s_ruler[0]', a:mode)),
-  "       \ s:palette.H_bg[1], eval(printf('s:palette.%s_ruler[1]', a:mode)),
-  "       \ 'bold')
-endfunction
-
-function! s:Highlight(group, guifg, guibg, ctermfg, ctermbg, style) abort
-  exec printf('hi %s guifg=%s guibg=%s ctermfg=%s ctermbg=%s gui=%s cterm=%s',
-        \ a:group, a:guifg, a:guibg, a:ctermfg, a:ctermbg, a:style, a:style)
-endfunction
+" }}}

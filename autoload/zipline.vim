@@ -16,7 +16,6 @@ function! zipline#Update() abort
     set showtabline=2
     let &tabline=parts#tabline#Tabline()
     call s:Construct('active')
-    call parts#highlight#Cache()
     call parts#highlight#Link('n')
     let s:startup = 0
   endif
