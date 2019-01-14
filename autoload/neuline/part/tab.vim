@@ -2,19 +2,20 @@ scriptencoding utf-8
 
 let s:tabs = {'list': [1], 'str': ''}
 let s:prev_tab = 0
+let s:button = get(g:, 'neu.tbl.button', '[]')
 
-function! parts#tabline#Tabline() abort
-  return '%#ZTLeft#'.'  %<%{parts#tabline#LeftPart()}'.'%='
-        \ .'%#ZTCurTab#'.'%{parts#tabline#CurrentTab()} '
-        \ .'%#ZTNotCurTab#'.'%{parts#tabline#NotCurrentTab()} '
-        \ .'%999X%{parts#tabline#CloseButton()} '
-endfunction
+" function! neuline#parts#tabline#_() abort
+"   return '%#NTLeft#'.'  %<%{parts#tabline#LeftPart()}'.'%='
+"         \ .'%#NTCurTab#'.'%{parts#tabline#CurrentTab()} '
+"         \ .'%#NTNotCurTab#'.'%{parts#tabline#NotCurrentTab()} '
+"         \ .'%999X%{parts#tabline#CloseButton()} '
+" endfunction
 
-function! parts#tabline#LeftPart() abort
-  return get(g:, 'zipline.talleft', getcwd())
-endfunction
+" function! parts#tabline#LeftPart() abort
+"   return get(g:, 'zipline.talleft', getcwd())
+" endfunction
 
-function! parts#tabline#CurrentTab() abort
+function! neuline#part#tab#Current() abort
   if tabpagenr('$') == 1
     return ''
   else
@@ -22,7 +23,7 @@ function! parts#tabline#CurrentTab() abort
   endif
 endfunction
 
-function! parts#tabline#NotCurrentTab() abort
+function! neuline#part#tab#NotCurrent() abort
   let l:diff = tabpagenr('$') - len(s:tabs.list)
 
   if tabpagenr() == s:prev_tab && l:diff == 0
@@ -57,13 +58,14 @@ function! parts#tabline#NotCurrentTab() abort
   for nr in s:tabs.list[1:]  " Only take the non-current part
     let s:tabs.str .= ' '.nr
   endfor
+
   return s:tabs.str
 endfunction
 
-function! parts#tabline#CloseButton() abort
+function! neuline#part#tab#CloseButton() abort
   if tabpagenr('$') == 1
     return ''
   else
-    return '[]'
+    return s:button
   endif
 endfunction
