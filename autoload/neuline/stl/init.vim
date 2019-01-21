@@ -1,7 +1,7 @@
 scriptencoding utf-8
 
 function! neuline#stl#init#Construct(status) abort
-  return s:LeftPart(a:status).'%='.s:RightPart(a:status)
+  return s:LeftPart(a:status).'%=%<'.s:RightPart(a:status)
         \ .'%{neuline#stl#highlight#Link()}'
 endfunction
 
