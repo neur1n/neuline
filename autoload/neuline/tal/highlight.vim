@@ -29,7 +29,7 @@ endfunction
 "**************************************************************** Definition{{{
 function! s:HiStatic() abort
   call neutil#palette#Highlight('NTlogo', s:palette.green, s:palette.bgh, 'bold')
-  call neutil#palette#Highlight('NTbufinfo', s:palette.fgh, s:palette.bgh, 'bold')
+  call neutil#palette#Highlight('NTbufinfo', s:palette.fgm, s:palette.bgh, 'bold')
   call neutil#palette#Highlight('NTctab', s:palette.orange, s:palette.bgh, 'bold')
   call neutil#palette#Highlight('NTntab', s:palette.blue, s:palette.bgh, 'bold')
   call neutil#palette#Highlight('NTbutton', s:palette.red, s:palette.bgh, 'bold')

@@ -61,9 +61,9 @@ endfunction
 "**************************************************************** Definition{{{
 function! s:HiStatic() abort
   " Inactive mode and file info.
-  call neutil#palette#Highlight('NSbufinfoIN', s:palette.fgh, s:palette.bgh, 'bold')
+  call neutil#palette#Highlight('NSbufinfoIN', s:palette.fgm, s:palette.bgh, 'bold')
   call neutil#palette#Highlight('NSmodifIN', s:palette.purple, s:palette.bgh, 'bold')
-  call neutil#palette#Highlight('NSrulerIN', s:palette.fgh, s:palette.bgh, 'NONE')
+  call neutil#palette#Highlight('NSrulerIN', s:palette.fgm, s:palette.bgh, 'NONE')
 
   call neutil#palette#Highlight('NSfileinfo', s:palette.gray, s:palette.bgh, 'NONE')
 
@@ -76,7 +76,7 @@ function! s:HiStatic() abort
     highlight link NSswapIN NSswap
   endif
   if exists(':Tagbar')
-    call neutil#palette#Highlight('NStag', s:palette.fgh, s:palette.bgh, 'italic')
+    call neutil#palette#Highlight('NStag', s:palette.fgm, s:palette.bgh, 'italic')
   endif
 
   if exists('g:loaded_neomake') || exists('g:loaded_ale') || exists('g:did_coc_loaded')
