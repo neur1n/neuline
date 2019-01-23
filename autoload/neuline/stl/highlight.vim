@@ -1,17 +1,17 @@
 scriptencoding utf-8
 
 try
-  let s:palette = neutil#palette#Palette()
+  let s:plt = neutil#palette#Palette()
 catch /^Vim\%((\a\+)\)\=:E/
   finish
 endtry
 
 let s:color_map = {
-      \ 'N': [s:palette.green, s:palette.cyan],
-      \ 'I': [s:palette.cyan, s:palette.blue],
-      \ 'V': [s:palette.yellow, s:palette.orange],
-      \ 'R': [s:palette.purple, s:palette.blue],
-      \ 'C': [s:palette.red, s:palette.cyan],
+      \ 'N': [s:plt.green, s:plt.cyan],
+      \ 'I': [s:plt.cyan, s:plt.blue],
+      \ 'V': [s:plt.yellow, s:plt.orange],
+      \ 'R': [s:plt.purple, s:plt.blue],
+      \ 'C': [s:plt.red, s:plt.cyan],
       \ }
 
 let s:link_map = {
@@ -61,36 +61,36 @@ endfunction
 "**************************************************************** Definition{{{
 function! s:HiStatic() abort
   " Inactive mode and file info.
-  call neutil#palette#Highlight('NSbufinfoIN', s:palette.fgm, s:palette.bgh, 'bold')
-  call neutil#palette#Highlight('NSmodifIN', s:palette.purple, s:palette.bgh, 'bold')
-  call neutil#palette#Highlight('NSrulerIN', s:palette.fgm, s:palette.bgh, 'NONE')
+  call neutil#palette#Highlight('NSbufinfoIN', s:plt.fgm, s:plt.bgh, 'bold')
+  call neutil#palette#Highlight('NSmodifIN', s:plt.purple, s:plt.bgh, 'bold')
+  call neutil#palette#Highlight('NSrulerIN', s:plt.fgm, s:plt.bgh, 'NONE')
 
-  call neutil#palette#Highlight('NSfileinfo', s:palette.gray, s:palette.bgh, 'NONE')
+  call neutil#palette#Highlight('NSfileinfo', s:plt.gray, s:plt.bgh, 'NONE')
 
   " Plugin dependent.
   if exists('g:loaded_gitbranch')
-    call neutil#palette#Highlight('NSvcs', s:palette.fgm, s:palette.gray, 'bold')
+    call neutil#palette#Highlight('NSvcs', s:plt.fgm, s:plt.gray, 'bold')
   endif
   if exists('g:loaded_windowswap')
-    call neutil#palette#Highlight('NSswap', s:palette.orange, s:palette.bgh, 'bold')
+    call neutil#palette#Highlight('NSswap', s:plt.orange, s:plt.bgh, 'bold')
     highlight link NSswapIN NSswap
   endif
   if exists(':Tagbar')
-    call neutil#palette#Highlight('NStag', s:palette.fgm, s:palette.bgh, 'italic')
+    call neutil#palette#Highlight('NStag', s:plt.fgm, s:plt.bgh, 'italic')
   endif
 
   if exists('g:loaded_neomake') || exists('g:loaded_ale') || exists('g:did_coc_loaded')
-    call neutil#palette#Highlight('NSlinti', s:palette.blue, s:palette.bgh, 'bold')
-    call neutil#palette#Highlight('NSlinth', s:palette.green, s:palette.bgh, 'bold')
-    call neutil#palette#Highlight('NSlintw', s:palette.orange, s:palette.bgh, 'bold')
-    call neutil#palette#Highlight('NSlinte', s:palette.red, s:palette.bgh, 'bold')
+    call neutil#palette#Highlight('NSlinti', s:plt.blue, s:plt.bgh, 'bold')
+    call neutil#palette#Highlight('NSlinth', s:plt.green, s:plt.bgh, 'bold')
+    call neutil#palette#Highlight('NSlintw', s:plt.orange, s:plt.bgh, 'bold')
+    call neutil#palette#Highlight('NSlinte', s:plt.red, s:plt.bgh, 'bold')
   endif
 endfunction
 
 function! s:HiDynamic(mode) abort
-  call neutil#palette#Highlight('NSmode'.a:mode, s:palette.bgh, s:color_map[a:mode][0], 'bold')
-  call neutil#palette#Highlight('NSbufinfo'.a:mode, s:palette.bgh, s:color_map[a:mode][1], 'bold')
-  call neutil#palette#Highlight('NSmodif'.a:mode, s:palette.red, s:palette.bgh, 'bold')
-  call neutil#palette#Highlight('NSruler'.a:mode, s:color_map[a:mode][0], s:palette.bgh, 'NONE')
+  call neutil#palette#Highlight('NSmode'.a:mode, s:plt.bgh, s:color_map[a:mode][0], 'bold')
+  call neutil#palette#Highlight('NSbufinfo'.a:mode, s:plt.bgh, s:color_map[a:mode][1], 'bold')
+  call neutil#palette#Highlight('NSmodif'.a:mode, s:plt.red, s:plt.bgh, 'bold')
+  call neutil#palette#Highlight('NSruler'.a:mode, s:color_map[a:mode][0], s:plt.bgh, 'NONE')
 endfunction
 "}}}

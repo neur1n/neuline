@@ -1,7 +1,7 @@
 scriptencoding utf-8
 
 try
-  let s:palette = neutil#palette#Palette()
+  let s:plt = neutil#palette#Palette()
 catch /^Vim\%((\a\+)\)\=:E/
   finish
 endtry
@@ -28,10 +28,10 @@ endfunction
 
 "**************************************************************** Definition{{{
 function! s:HiStatic() abort
-  call neutil#palette#Highlight('NTlogo', s:palette.green, s:palette.bgh, 'bold')
-  call neutil#palette#Highlight('NTbufinfo', s:palette.fgm, s:palette.bgh, 'bold')
-  call neutil#palette#Highlight('NTctab', s:palette.orange, s:palette.bgh, 'bold')
-  call neutil#palette#Highlight('NTntab', s:palette.blue, s:palette.bgh, 'bold')
-  call neutil#palette#Highlight('NTbutton', s:palette.red, s:palette.bgh, 'bold')
+  call neutil#palette#Highlight('NTlogo', s:plt.green, s:plt.bgh, 'bold')
+  call neutil#palette#Highlight('NTbufinfo', s:plt.fgm, s:plt.bgh, 'bold')
+  call neutil#palette#Highlight('NTctab', s:plt.orange, s:plt.bgh, 'bold')
+  call neutil#palette#Highlight('NTntab', s:plt.blue, s:plt.bgh, 'bold')
+  call neutil#palette#Highlight('NTbutton', s:plt.red, s:plt.bgh, 'bold')
 endfunction
 "}}}
