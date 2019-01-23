@@ -9,16 +9,15 @@ function! neuline#part#bufinfo#_(...) abort
 
   for item in l:format
     if count(s:func_list, item)
-      call extend(l:bufinfo, [eval('s:'.item.'()')])
-      " let l:bufinfo .= eval('s:'.item.'()')
+      call add(l:bufinfo, eval('s:'.item.'()'))
     else
-      call extend(l:bufinfo, [item])
-      " let l:bufinfo .= item
+      call add(l:bufinfo, item)
     endif
   endfor
 
+  call add(l:bufinfo, ' ')
+
   return extend([' '], l:bufinfo)
-  " return ' '.l:bufinfo
 endfunction
 
 function! s:Cwd() abort

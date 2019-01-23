@@ -69,7 +69,7 @@ function! s:HiStatic() abort
 
   " Plugin dependent.
   if exists('g:loaded_gitbranch')
-    call neutil#palette#Highlight('NSvcs', s:palette.fgs, s:palette.bgh, 'bold')
+    call neutil#palette#Highlight('NSvcs', s:palette.fgm, s:palette.gray, 'bold')
   endif
   if exists('g:loaded_windowswap')
     call neutil#palette#Highlight('NSswap', s:palette.orange, s:palette.bgh, 'bold')
@@ -89,7 +89,7 @@ endfunction
 
 function! s:HiDynamic(mode) abort
   call neutil#palette#Highlight('NSmode'.a:mode, s:palette.bgh, s:color_map[a:mode][0], 'bold')
-  call neutil#palette#Highlight('NSbufinfo'.a:mode, s:color_map[a:mode][1], s:palette.bgh, 'bold')
+  call neutil#palette#Highlight('NSbufinfo'.a:mode, s:palette.bgh, s:color_map[a:mode][1], 'bold')
   call neutil#palette#Highlight('NSmodif'.a:mode, s:palette.red, s:palette.bgh, 'bold')
   call neutil#palette#Highlight('NSruler'.a:mode, s:color_map[a:mode][0], s:palette.bgh, 'NONE')
 endfunction
