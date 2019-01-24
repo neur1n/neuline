@@ -38,7 +38,7 @@ function! s:SetSection() abort
   endif
 
   if !exists('g:neu.tal.section.logo')
-    let g:neu.tal.section.logo = ['NTlogo', [' ', neuline#part#logo#_('vim')]]
+    let g:neu.tal.section.logo = ['NTlogo', [' ', neuline#part#logo#_('vim'), '%<']]
   endif
 
   if !exists('g:neu.tal.section.bufinfo')

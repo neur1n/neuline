@@ -1,7 +1,7 @@
 scriptencoding utf-8
 
 function! neuline#tal#init#Construct() abort
-  return s:LeftPart().'%=%<'.s:RightPart()
+  return s:LeftPart().'%='.s:RightPart()
 endfunction
 
 function! s:LeftPart() abort
