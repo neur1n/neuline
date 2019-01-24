@@ -65,11 +65,11 @@ function! s:HiStatic() abort
   call neutil#palette#Highlight('NSmodifIN', s:plt.purple, s:plt.bgh, 'bold')
   call neutil#palette#Highlight('NSrulerIN', s:plt.fgm, s:plt.bgh, 'NONE')
 
-  call neutil#palette#Highlight('NSfileinfo', s:plt.gray, s:plt.bgh, 'NONE')
+  call neutil#palette#Highlight('NSfileinfo', s:plt.graym, s:plt.bgh, 'NONE')
 
   " Plugin dependent.
   if exists('g:loaded_gitbranch')
-    call neutil#palette#Highlight('NSvcs', s:plt.fgm, s:plt.gray, 'bold')
+    call neutil#palette#Highlight('NSvcs', s:plt.fgm, s:plt.graym, 'bold')
   endif
   if exists('g:loaded_windowswap')
     call neutil#palette#Highlight('NSswap', s:plt.orange, s:plt.bgh, 'bold')
