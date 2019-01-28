@@ -15,7 +15,7 @@ function! neuline#tal#highlight#Init() abort
   call s:HiStatic()
 
   if exists('g:loaded_neurun')
-    highlight link NTneurun TabLineFill
+    highlight link NTneurun NTbufinfo
   endif
 endfunction
 
