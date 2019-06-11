@@ -17,7 +17,7 @@ call neuline#tal#highlight#Init()
 augroup neustl
   autocmd!
   autocmd WinEnter,BufWinEnter,FileType,SessionLoadPost * call neustl#Update()
-  autocmd BufUnload * call neustl#UpdateOnce()
+  autocmd BufUnload,BufWinLeave * call neustl#UpdateOnce()
   autocmd ColorScheme,SessionLoadPost * call neuline#stl#highlight#Link()
   if exists('g:loaded_neurun')
     autocmd User NeurunAction call neustl#UpdateOnce()
