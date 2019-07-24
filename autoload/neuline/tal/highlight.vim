@@ -28,10 +28,10 @@ endfunction
 
 "**************************************************************** Definition{{{
 function! s:HiStatic() abort
-  call neutil#palette#Highlight('NTlogo', s:plt.green, s:plt.bgh, 'bold')
-  call neutil#palette#Highlight('NTbufinfo', s:plt.fgm, s:plt.bgh, 'bold')
-  call neutil#palette#Highlight('NTctab', s:plt.orange, s:plt.bgh, 'bold')
-  call neutil#palette#Highlight('NTntab', s:plt.blue, s:plt.bgh, 'bold')
-  call neutil#palette#Highlight('NTbutton', s:plt.red, s:plt.bgh, 'bold')
+  call neutil#palette#Highlight('NTlogo', s:plt.bgh, s:plt.grays, 'bold')
+  call neutil#palette#Highlight('NTbufinfo', s:plt.bgh, s:plt.grays, 'bold')
+  call neutil#palette#Highlight('NTctab', s:plt.orange, s:plt.grays, 'bold')
+  call neutil#palette#Highlight('NTnctab', s:plt.bgh, s:plt.grays, 'bold')
+  call neutil#palette#Highlight('NTbutton', s:plt.bgh, s:plt.grays, 'bold')
 endfunction
 "}}}

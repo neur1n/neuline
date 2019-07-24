@@ -2,18 +2,7 @@ scriptencoding utf-8
 
 let s:tabs = {'list': [1], 'str': ''}
 let s:prev_tab = 0
-let s:button = get(g:, 'neu.tbl.button', '[]')
-
-" function! neuline#parts#tabline#_() abort
-"   return '%#NTLeft#'.'  %<%{parts#tabline#LeftPart()}'.'%='
-"         \ .'%#NTCurTab#'.'%{parts#tabline#CurrentTab()} '
-"         \ .'%#NTNotCurTab#'.'%{parts#tabline#NotCurrentTab()} '
-"         \ .'%999X%{parts#tabline#CloseButton()} '
-" endfunction
-
-" function! parts#tabline#LeftPart() abort
-"   return get(g:, 'zipline.talleft', getcwd())
-" endfunction
+let s:button = get(g:, 'neuline.tbl.button', '[]')
 
 function! neuline#part#tab#Current() abort
   if tabpagenr('$') == 1

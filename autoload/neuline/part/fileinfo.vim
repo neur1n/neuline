@@ -5,5 +5,5 @@ function! neuline#part#fileinfo#_() abort
   let l:fenc = '%{&fileencoding ? &fileencoding : &encoding}'
   let l:ff = '%{&fileformat}'
 
-  return printf(' %s[%s:%s]', l:ft, l:fenc, l:ff)
+  return printf(' %s[%s:%s] ', l:ft, l:fenc, l:ff)
 endfunction
