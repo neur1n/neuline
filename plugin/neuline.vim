@@ -13,8 +13,8 @@ call neuline#tal#highlight#Init()
 
 augroup neustl
   autocmd!
-  autocmd WinEnter,BufWinEnter,FileType,SessionLoadPost * call neustl#Update()
-  autocmd BufUnload,BufWinLeave,CursorMoved * call neustl#UpdateOnce()
+  autocmd WinEnter,BufWinEnter,FileType,SessionLoadPost,VimResized * call neustl#Update()
+  autocmd BufUnload,BufWinLeave * call neustl#UpdateOnce()
   autocmd ColorScheme,SessionLoadPost * call neuline#stl#highlight#Link()
 augroup END
 
