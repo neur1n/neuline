@@ -61,17 +61,17 @@ endfunction
 "**************************************************************** Definition{{{
 function! s:HiStatic() abort
   " Inactive mode and file info.
-  call neutil#palette#Highlight('NSbufinfoIN', s:plt.fgm, s:plt.grays, 'bold')
-  call neutil#palette#Highlight('NSmodifIN', s:plt.purple, s:plt.grays, 'bold')
-  call neutil#palette#Highlight('NSrulerIN', s:plt.fgm, s:plt.grays, 'bold')
+  call neutil#palette#Highlight('NSbufinfoIN', s:plt.fgm, s:plt.grays)
+  call neutil#palette#Highlight('NSmodifIN', s:plt.purple, s:plt.grays)
+  call neutil#palette#Highlight('NSrulerIN', s:plt.fgm, s:plt.grays)
 
-  call neutil#palette#Highlight('NSfileinfo', s:plt.bgh, s:plt.graym, 'bold')
+  call neutil#palette#Highlight('NSfileinfo', s:plt.bgh, s:plt.graym)
 endfunction
 
 function! s:HiDynamic(mode) abort
-  call neutil#palette#Highlight('NSmode'.a:mode, s:plt.bgh, s:color_map[a:mode][0], 'bold')
-  call neutil#palette#Highlight('NSbufinfo'.a:mode, s:plt.bgh, s:color_map[a:mode][1], 'bold')
-  call neutil#palette#Highlight('NSmodif'.a:mode, s:plt.red, s:plt.bgh, 'bold')
-  call neutil#palette#Highlight('NSruler'.a:mode, s:plt.bgh, s:color_map[a:mode][0], 'bold')
+  call neutil#palette#Highlight('NSmode'.a:mode, s:plt.bgh, s:color_map[a:mode][0])
+  call neutil#palette#Highlight('NSbufinfo'.a:mode, s:plt.bgh, s:color_map[a:mode][1])
+  call neutil#palette#Highlight('NSmodif'.a:mode, s:plt.red, s:plt.bgh)
+  call neutil#palette#Highlight('NSruler'.a:mode, s:plt.bgh, s:color_map[a:mode][0])
 endfunction
 "}}}
