@@ -61,42 +61,41 @@ endfunction
 "**************************************************************** Definition{{{
 function! s:HiStatic() abort
   " Inactive mode and file info.
-  if exists('g:neuline.stl.definition')
-    if exists('g:neuline.stl.definition.bufinfo')
+  if !exists('g:neuline.stl.definition')
+    if !exists('g:neuline.stl.definition.bufinfo')
       call neutil#palette#Highlight('NSbufinfoIN', s:plt.fgm, s:plt.grays)
     endif
 
-    if exists('g:neuline.stl.definition.modif')
+    if !exists('g:neuline.stl.definition.modif')
       call neutil#palette#Highlight('NSmodifIN', s:plt.purple, s:plt.grays)
     endif
 
-    if exists('g:neuline.stl.definition.ruler')
+    if !exists('g:neuline.stl.definition.ruler')
       call neutil#palette#Highlight('NSrulerIN', s:plt.fgm, s:plt.grays)
     endif
 
-    if exists('g:neuline.stl.definition.fileinfo')
+    if !exists('g:neuline.stl.definition.fileinfo')
       call neutil#palette#Highlight('NSfileinfo', s:plt.bgh, s:plt.graym)
     endif
   endif
 endfunction
 
 function! s:HiDynamic(mode) abort
-  if exists('g:neuline.stl.definition')
-    if exists('g:neuline.stl.definition.mode')
+  if !exists('g:neuline.stl.definition')
+    if !exists('g:neuline.stl.definition.mode')
       call neutil#palette#Highlight('NSmode'.a:mode, s:plt.bgh, s:color_map[a:mode][0])
     endif
 
-    if exists('g:neuline.stl.definition.bufinfo')
+    if !exists('g:neuline.stl.definition.bufinfo')
       call neutil#palette#Highlight('NSbufinfo'.a:mode, s:plt.bgh, s:color_map[a:mode][1])
     endif
 
-    if exists('g:neuline.stl.definition.modif')
+    if !exists('g:neuline.stl.definition.modif')
       call neutil#palette#Highlight('NSmodif'.a:mode, s:plt.red, s:plt.bgh)
     endif
 
-    if exists('g:neuline.stl.definition.ruler')
+    if !exists('g:neuline.stl.definition.ruler')
       call neutil#palette#Highlight('NSruler'.a:mode, s:plt.bgh, s:color_map[a:mode][0])
-    endif
     endif
   endif
 endfunction
