@@ -61,17 +61,43 @@ endfunction
 "**************************************************************** Definition{{{
 function! s:HiStatic() abort
   " Inactive mode and file info.
-  call neutil#palette#Highlight('NSbufinfoIN', s:plt.fgm, s:plt.grays)
-  call neutil#palette#Highlight('NSmodifIN', s:plt.purple, s:plt.grays)
-  call neutil#palette#Highlight('NSrulerIN', s:plt.fgm, s:plt.grays)
+  if exists('g:neuline.stl.definition')
+    if exists('g:neuline.stl.definition.bufinfo')
+      call neutil#palette#Highlight('NSbufinfoIN', s:plt.fgm, s:plt.grays)
+    endif
 
-  call neutil#palette#Highlight('NSfileinfo', s:plt.bgh, s:plt.graym)
+    if exists('g:neuline.stl.definition.modif')
+      call neutil#palette#Highlight('NSmodifIN', s:plt.purple, s:plt.grays)
+    endif
+
+    if exists('g:neuline.stl.definition.ruler')
+      call neutil#palette#Highlight('NSrulerIN', s:plt.fgm, s:plt.grays)
+    endif
+
+    if exists('g:neuline.stl.definition.fileinfo')
+      call neutil#palette#Highlight('NSfileinfo', s:plt.bgh, s:plt.graym)
+    endif
+  endif
 endfunction
 
 function! s:HiDynamic(mode) abort
-  call neutil#palette#Highlight('NSmode'.a:mode, s:plt.bgh, s:color_map[a:mode][0])
-  call neutil#palette#Highlight('NSbufinfo'.a:mode, s:plt.bgh, s:color_map[a:mode][1])
-  call neutil#palette#Highlight('NSmodif'.a:mode, s:plt.red, s:plt.bgh)
-  call neutil#palette#Highlight('NSruler'.a:mode, s:plt.bgh, s:color_map[a:mode][0])
+  if exists('g:neuline.stl.definition')
+    if exists('g:neuline.stl.definition.mode')
+      call neutil#palette#Highlight('NSmode'.a:mode, s:plt.bgh, s:color_map[a:mode][0])
+    endif
+
+    if exists('g:neuline.stl.definition.bufinfo')
+      call neutil#palette#Highlight('NSbufinfo'.a:mode, s:plt.bgh, s:color_map[a:mode][1])
+    endif
+
+    if exists('g:neuline.stl.definition.modif')
+      call neutil#palette#Highlight('NSmodif'.a:mode, s:plt.red, s:plt.bgh)
+    endif
+
+    if exists('g:neuline.stl.definition.ruler')
+      call neutil#palette#Highlight('NSruler'.a:mode, s:plt.bgh, s:color_map[a:mode][0])
+    endif
+    endif
+  endif
 endfunction
 "}}}
