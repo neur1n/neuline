@@ -17,7 +17,6 @@ endfunction
 
 "**************************************************************** Definition{{{
 function! s:HiStatic() abort
-  if !exists('g:neuline.tal.definition')
     if !exists('g:neuline.tal.definition.logo')
       call neutil#palette#Highlight('NTlogo', s:plt.bgh, s:plt.grays)
     endif
@@ -37,6 +36,5 @@ function! s:HiStatic() abort
     if !exists('g:neuline.tal.definition.button')
       call neutil#palette#Highlight('NTbutton', s:plt.bgh, s:plt.grays, 'bold')
     endif
-  endif
 endfunction
 "}}}
