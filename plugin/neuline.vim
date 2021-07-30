@@ -3,7 +3,7 @@ scriptencoding utf-8
 if exists('g:loaded_neuline')
   finish
 endif
-let g:loaded_neuline = 1
+let g:loaded_neuline = v:true
 
 let s:save_cpo = &cpoptions
 set cpoptions&vim
